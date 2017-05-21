@@ -40,6 +40,14 @@ public class MainGUI extends JDialog {
         frame.setVisible(true);
     }
 
+    private static void setUIFlavour() {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void initComponents() {
         chooseFileButton.addActionListener(new ActionListener() {
             @Override
@@ -68,7 +76,7 @@ public class MainGUI extends JDialog {
                 try {
                     Scanner sc = new Scanner(fileForOperations);
                     int n = sc.nextInt();
-                    int [][] matrix = new int[n][n];
+                    int[][] matrix = new int[n][n];
                     for (int i = 0; i < n; i++) {
                         int node = sc.nextInt();
                         int edges = sc.nextInt();
@@ -85,13 +93,5 @@ public class MainGUI extends JDialog {
                 }
             }
         });
-    }
-
-    private static void setUIFlavour() {
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
