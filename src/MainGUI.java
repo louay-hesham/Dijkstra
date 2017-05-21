@@ -16,7 +16,7 @@ public class MainGUI extends JDialog {
     private JButton chooseFileButton;
     private JTextArea inputTextArea;
     private JTextArea outputTextArea;
-    private JButton startDijkstraIndomieButton;
+    private JButton startDijkstraButton;
 
     private File fileForOperations;
 
@@ -70,7 +70,7 @@ public class MainGUI extends JDialog {
             }
         });
 
-        startDijkstraIndomieButton.addActionListener(new ActionListener() {
+        startDijkstraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
