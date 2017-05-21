@@ -3,7 +3,7 @@ import java.lang.*;
 import java.io.*;
 
 public class Dijkstra {
-    static int V;
+    static int V = 9;
 
     int minDistance(int dist[], Boolean sptSet[]) {
         // Initialize min value
@@ -18,14 +18,14 @@ public class Dijkstra {
         return min_index;
     }
 
-    void printSolution(int dist[], int n) {
-        System.out.println("Vertex   Distance from Source");
+    public void printSolution(int dist[], int n) {
+
         for (int i = 0; i < V; i++)
             System.out.println(i + " \t\t " + dist[i]);
     }
 
 
-    void dijkstra(int graph[][], int src) {
+    public  void dijkstra_algorithm(int graph[][], int src) {
         int dist[] = new int[V];
 
         Boolean sptSet[] = new Boolean[V];
