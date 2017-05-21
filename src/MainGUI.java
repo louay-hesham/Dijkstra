@@ -79,7 +79,7 @@ public class MainGUI extends JDialog {
                             matrix[adjacentNode][node] = weight;
                         }
                     }
-
+                    outputTextArea.setText(Dijkstra.doDijkstra(matrix));
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 }
