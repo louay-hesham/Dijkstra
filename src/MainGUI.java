@@ -3,10 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Scanner;
 
 public class MainGUI extends JDialog {
     private JPanel contentPane;
@@ -63,7 +65,24 @@ public class MainGUI extends JDialog {
         startDijkstraIndomieButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //start Dijkstra
+                try {
+                    Scanner sc = new Scanner(fileForOperations);
+                    int n = sc.nextInt();
+                    int [][] matrix = new int[n][n];
+                    for (int i = 0; i < n; i++) {
+                        int node = sc.nextInt();
+                        int edges = sc.nextInt();
+                        for (int j = 0; j < edges; j++) {
+                            int adjacentNode = sc.nextInt();
+                            int weight = sc.nextInt();
+                            matrix[node][adjacentNode] = weight;
+                            matrix[adjacentNode][node] = weight;
+                        }
+                    }
+
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
     }
