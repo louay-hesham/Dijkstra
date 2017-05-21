@@ -1,11 +1,20 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
-
 public class Dijkstra {
-    static int V = 9;
+    static int V ;
 
-    int minDistance(int dist[], Boolean sptSet[]) {
+    public static String doDijkstra (int[][] graph) {
+        V = graph.length;
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0 ; i < V ;i++)
+        {
+            sb.append("Vertex ID ").append(i).append("\n");
+            sb.append("Node   Distance from Source\n");
+            dijkstra_algorithm(graph, i, sb);
+            sb.append("\n\n");
+        }
+        return sb.toString();
+    }
+
+    private static int minDistance(int dist[], Boolean sptSet[]) {
         // Initialize min value
         int min = Integer.MAX_VALUE, min_index = -1;
 
@@ -18,14 +27,13 @@ public class Dijkstra {
         return min_index;
     }
 
-    public void printSolution(int dist[], int n) {
+    private static void printSolution(int dist[], StringBuilder sb) {
 
         for (int i = 0; i < V; i++)
-            System.out.println(i + " \t\t " + dist[i]);
+            sb.append(i).append(" \t\t ").append(dist[i]).append("\n");
     }
 
-
-    public  void dijkstra_algorithm(int graph[][], int src) {
+    private static void dijkstra_algorithm(int graph[][], int src, StringBuilder sb) {
         int dist[] = new int[V];
 
         Boolean sptSet[] = new Boolean[V];
@@ -52,6 +60,6 @@ public class Dijkstra {
                     dist[v] = dist[u] + graph[u][v];
         }
 
-        printSolution(dist, V);
+        printSolution(dist, sb);
     }
 }
