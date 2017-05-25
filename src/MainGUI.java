@@ -2,9 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -29,11 +27,14 @@ public class MainGUI extends JDialog {
         inputTextArea.setFont(new Font("monospaced", Font.PLAIN, 12));
         outputTextArea.setFont(new Font("monospaced", Font.PLAIN, 12));
         initComponents();
+        InputStreamReader in = new InputStreamReader(getClass().getResourceAsStream("Dijkstra-Test.txt"));
+        this.loadTestFile(in);
+        this.startTestDijkstra();
     }
 
     public static void main(String[] args) {
         setUIFlavour();
-        JFrame frame = new JFrame("AVL Dictionary");
+        JFrame frame = new JFrame("Dijkstra Test");
         frame.setContentPane(new MainGUI().contentPane);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
@@ -84,14 +85,47 @@ public class MainGUI extends JDialog {
                             int adjacentNode = sc.nextInt();
                             int weight = sc.nextInt();
                             matrix[node][adjacentNode] = weight;
-                            matrix[adjacentNode][node] = weight;
                         }
                     }
-                    outputTextArea.setText(Dijkstra.doDijkstra(matrix));
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(Dijkstra.doDijkstra(matrix));
+                    outputTextArea.setText(sb.toString());
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 }
             }
         });
+    }
+
+    private void loadTestFile(InputStreamReader in) {
+        filePathTextField.setText("Built in test file from session 7 PDF");
+        StringBuilder sb = new StringBuilder();
+        Object[] fileLines = new BufferedReader(in).lines().toArray();
+        for (Object line : fileLines) {
+            sb.append(line).append("\n");
+        }
+        inputTextArea.setText(sb.toString());
+    }
+
+    private void startTestDijkstra() {
+        int[][] matrix = new int[][] {
+                {0, 10, 5, 0, 0},
+                {0, 0, 2, 1, 0},
+                {0, 3, 0, 9, 2},
+                {0, 0, 0, 0, 4},
+                {7, 0, 0, 6, 0}
+        };
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("This is a test run from session 7 PDF.\n");
+        sb.append("Please note that we're looping through every node and treating is as a source\n");
+        sb.append("The nodes are given IDs as follows:\n");
+        sb.append("S -> 0\n");
+        sb.append("T -> 1\n");
+        sb.append("Y -> 2\n");
+        sb.append("X -> 3\n");
+        sb.append("Z -> 4\n\n");
+        sb.append(Dijkstra.doDijkstra(matrix));
+        outputTextArea.setText(sb.toString());
     }
 }
