@@ -5,7 +5,7 @@ public class Dijkstra {
         V = graph.length;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < V; i++) {
-            sb.append("Vertex ID ").append(i).append("\n");
+            sb.append("Source vertex ID: ").append(i).append("\n");
             sb.append("Node   Distance from Source\n");
             dijkstra_algorithm(graph, i, sb);
             sb.append("\n\n");
